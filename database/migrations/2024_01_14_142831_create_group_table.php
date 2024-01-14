@@ -17,6 +17,7 @@ return new class extends Migration
 			$table->foreign('karyawan_id')->references('id')->on('karyawan')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('wilayah_id');
 			$table->foreign('wilayah_id')->references('id')->on('wilayah')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('nama', 255);
             $table->text('job');
             $table->text('alamat');
             $table->timestamps();
