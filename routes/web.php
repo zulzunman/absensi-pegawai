@@ -21,9 +21,9 @@ Route::get('/', function () {
 
 Route::prefix('wilayah')->group(function () {
     Route::get('/', [WilayahController::class, 'get_data']);
-    Route::post('/add/store', [WilayahController::class, 'dataStore'])->name('wilayah.store');
-    // Route::put('/{id}', [LocationController::class, 'update'])->name('location.update');
-    // Route::delete('/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
-    // Route::post('/search', [LocationController::class, 'search'])->name('location.search');
-    // Route::post('/filter', [LocationController::class, 'filter'])->name('location.filter');
+    Route::get('/addData', [WilayahController::class, 'addData'])->name('wilayah.add');
+    Route::post('/addData/store', [WilayahController::class, 'dataStore'])->name('wilayah.store');
+    Route::get('/edit/{id}', [WilayahController::class, 'editData'])->name('wilayah.edit');
+    Route::put('/edit/{id}', [WilayahController::class, 'dataUpdate'])->name('wilayah.update');
+    Route::delete('/{id}', [WilayahController::class, 'destroy'])->name('wilayah.destroy');
 });

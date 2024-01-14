@@ -11,11 +11,19 @@ class WilayahController extends Controller
 {
     public function get_data()
 	{
-		$paging=10;
+		// $paging=10;
         $wilayahs = DB::table('wilayah')->get();
-		$wilayah = wilayah::paginate($paging);
-
+		$wilayah = wilayah::all();
+		// $wilayah = wilayah::paginate($paging);
+		
 		return view('wilayah.getData', compact(['wilayah']));
+	}
+
+	public function addData()
+	{
+		$will = wilayah::all();
+
+		return view('wilayah.addData', ['will' => $will]);
 	}
 
     public function dataStore(Request $request)
@@ -35,32 +43,33 @@ class WilayahController extends Controller
 		return redirect('/wilayah');
 	}
 
-    // public function update(Request $request, $id)
-	// {
-    //     $validator = $request->validate([
-    //         'office'   => 'required',
-    //         'floor'   => 'required|numeric',
-    //         'room'   => 'required',
-	// 	],[
-	// 		'office.required' => 'Nama gedung tidak boleh kosong',
-	// 		'floor.required' => 'Lantai tidak boleh kosong',
-	// 		'room.required' => 'Nama ruangan tidak boleh kosong',
-	// 		'floor.numeric' => 'Lantai harus nomor',
-	// 	]);
+	public function editData($id)
+	{
+		$will = wilayah::findOrFail($id);;
 
-	// 	$update = [
-	// 		'office' => $validator['office'],
-	// 		'floor' => $validator['floor'],
-	// 		'room' => $validator['room'],
-	// 		'updated_at' => Carbon::now()
-	// 	];
-	// 	Location::where('id', $id)->update($update);
-	// 	return redirect('/location');
-	// }
+		return view('wilayah.editData', ['will' => $will]);
+	}
 
-    // public function destroy($id)
-	// {
-	// 	Location::destroy($id);
-	// 	return redirect('/location');
-	// }
+    public function dataUpdate(Request $request, $id)
+	{
+
+        $validator = $request->validate([
+            'nama'   => 'required'
+		],[
+			'nama.required' => 'Nama wilayah tidak boleh kosong',
+		]);
+		$update = [
+					'nama' => $validator['nama'],
+					'updated_at' => Carbon::now()
+				];
+				wilayah::where('id', $id)->update($update);
+
+		return redirect('/wilayah');
+	}
+
+    public function destroy($id)
+	{
+		wilayah::destroy($id);
+		return redirect('/wilayah');
+	}
 }
