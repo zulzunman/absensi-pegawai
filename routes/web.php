@@ -20,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Wilayah
 Route::prefix('wilayah')->group(function () {
     Route::get('/', [WilayahController::class, 'get_data']);
     Route::get('/addData', [WilayahController::class, 'addData'])->name('wilayah.add');
@@ -28,6 +29,7 @@ Route::prefix('wilayah')->group(function () {
     Route::put('/edit/{id}', [WilayahController::class, 'dataUpdate'])->name('wilayah.update');
     Route::delete('/{id}', [WilayahController::class, 'destroy'])->name('wilayah.destroy');
 });
+// Pegawai
 Route::prefix('pegawai')->group(function () {
     Route::get('/', [PegawaiController::class, 'get_data']);
     Route::get('/addData', [PegawaiController::class, 'addData'])->name('pegawai.add');
