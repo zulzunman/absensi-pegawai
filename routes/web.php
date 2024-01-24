@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,12 @@ Route::prefix('wilayah')->group(function () {
     Route::get('/edit/{id}', [WilayahController::class, 'editData'])->name('wilayah.edit');
     Route::put('/edit/{id}', [WilayahController::class, 'dataUpdate'])->name('wilayah.update');
     Route::delete('/{id}', [WilayahController::class, 'destroy'])->name('wilayah.destroy');
+});
+Route::prefix('pegawai')->group(function () {
+    Route::get('/', [PegawaiController::class, 'get_data']);
+    Route::get('/addData', [PegawaiController::class, 'addData'])->name('pegawai.add');
+    Route::post('/addData/store', [PegawaiController::class, 'dataStore'])->name('pegawai.store');
+    Route::get('/edit/{id}', [PegawaiController::class, 'editData'])->name('pegawai.edit');
+    Route::put('/edit/{id}', [PegawaiController::class, 'dataUpdate'])->name('pegawai.update');
+    Route::delete('/{id}', [PegawaiController::class, 'destroy'])->name('pegwai.destroy');
 });
